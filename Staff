@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Staff</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    background: black;
+    width: 100%;
+    height: 100%;
+    font-family: 'Quicksand', sans-serif;
+    overflow-y: auto;
+}
+
+canvas {
+    position: fixed;
+    inset: 0;
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Keep content above canvas */
+#title, #projects {
+    position: relative;
+    z-index: 1;
+}
+
+#title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 600;
+    color: #7fd4ff;
+    text-shadow: 0 0 20px rgba(0,180,255,.6), 0 0 40px rgba(0,120,255,.4);
+    margin-top: 24px;
+}
+
+/* FLEX LAYOUT FIX */
+#projects {
+    display: flex;
+    flex-wrap: wrap;              /* allows wrapping */
+    justify-content: center;      /* center horizontally */
+    gap: 40px;                    /* space between boxes */
+    color: #9adfff;
+    margin: 80px auto 100px;
+    max-width: 1200px;
+    padding: 0 10px;
+}
+
+.project-box {
+    flex: 1 1 300px;              /* responsive width */
+    max-width: 400px;
+    padding: 40px 25px;
+    background: rgba(0,40,90,0.85);
+    backdrop-filter: blur(14px);
+    border-radius: 18px;
+    box-shadow: 0 0 30px rgba(0,160,255,.4), inset 0 0 30px rgba(0,120,255,.35);
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.project-box img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: 15px 0;
+}
+
+.project-desc {
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+    #title { font-size: 28px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="title">
+Staff
+</div>
+
+<div id="projects">
+
+<div class="project-box">
+<div>RTX3080Ti</div>
+<img src="https://cdn.discordapp.com/avatars/1279444425147285567/78d593c0b4a5efaf6b29043608330adf.webp?size=1024" alt="pfp">
+<div class="project-desc">Role - Helper</div>
+</div>
+
+<div class="project-box">
+<div>Andrew</div>
+<img src="https://cdn.discordapp.com/avatars/1457448312918638737/6434e928273abd838af564270231156c.webp?size=1024" alt="pfp">
+<div class="project-desc">Role - Helper</div>
+</div>
+
+<div class="project-box">
+<div>Onogen</div>
+<img src="https://cdn.discordapp.com/avatars/1417222478631141378/5bcb2b6a0c67fce74a07cd4ec858037e.webp?size=1024" alt="pfp">
+<div class="project-desc">Role - Creator</div>
+</div>
+
+</div>
+
+<canvas id="c"></canvas>
+
+<script>
+const canvas=document.getElementById("c");
+const ctx=canvas.getContext("2d");
+
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
+window.addEventListener("resize",resize);resize();
+
+let mouseX=0,mouseY=0;
+window.addEventListener("mousemove",e=>{
+mouseX=(e.clientX/innerWidth-.5)*2;
+mouseY=(e.clientY/innerHeight-.5)*2;
+});
+
+const ORB_COUNT=14;
+const orbs=[];
+
+function rand(a,b){return Math.random()*(b-a)+a}
+
+function randomBlue(){
+const m=Math.random();
+if(m<.33)return`rgb(${rand(0,30)|0},${rand(80,160)|0},255)`
+if(m<.66)return`rgb(0,${rand(180,240)|0},255)`
+return`rgb(${rand(40,100)|0},${rand(140,200)|0},255)`
+}
+
+class Orb{
+constructor(){this.reset()}
+reset(){
+this.x=rand(-300,canvas.width+300)
+this.y=rand(-300,canvas.height+300)
+this.r=rand(250,520)
+this.dx=rand(-.5,.5)
+this.dy=rand(-.5,.5)
+this.depth=rand(.2,1)
+this.color=randomBlue()
+this.alpha=0
+}
+
+update(){
+this.x+=this.dx
+this.y+=this.dy
+this.alpha=Math.min(this.alpha+.003,1)
+
+if(this.x<-900||this.x>canvas.width+900||this.y<-900||this.y>canvas.height+900){
+this.reset()
+}
+}
+
+draw(){
+const px=this.x+mouseX*80*this.depth
+const py=this.y+mouseY*80*this.depth
+const g=ctx.createRadialGradient(px,py,0,px,py,this.r)
+g.addColorStop(0,this.color)
+g.addColorStop(1,"transparent")
+ctx.globalAlpha=this.alpha
+ctx.fillStyle=g
+ctx.beginPath()
+ctx.arc(px,py,this.r,0,Math.PI*2)
+ctx.fill()
+ctx.globalAlpha=1
+}
+}
+
+for(let i=0;i<ORB_COUNT;i++)orbs.push(new Orb())
+
+function loop(){
+ctx.clearRect(0,0,canvas.width,canvas.height)
+for(const o of orbs){o.update();o.draw()}
+requestAnimationFrame(loop)
+}
+
+loop();
+</script>
+
+</body>
+</html>
