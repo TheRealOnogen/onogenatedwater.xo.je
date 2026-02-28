@@ -1,0 +1,5 @@
+DirectoryIndex index.php index.html index.htm index2.html
+
+ErrorDocument 403 https://onogenatedwater.xo.je/403
+ErrorDocument 404 https://onogenatedwater.xo.je/404
+ErrorDocument 500 https://onogenatedwater.xo.je/500
