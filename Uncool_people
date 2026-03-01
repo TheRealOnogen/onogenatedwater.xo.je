@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Cool People</title>
+<title>Uncool People</title>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 
 <style>
@@ -92,70 +92,34 @@ Cool People
 <div id="projects">
 
 <div class="project-box">
-<div>RTX3080Ti</div>
-<img src="rtx.webp" alt="pfp">
+<div>fnsopko</div>
+<img src="fsnopko.webp" alt="pfp">
 </div>
 
 <div class="project-box">
-<div>Andrew</div>
-<img src="andrew.webp" alt="pfp">
+<div>idontknow062524</div>
+<img src="idontknow.webp" alt="pfp">
 </div>
 
 <div class="project-box">
-<div>Onogen</div>
-<img src="onogen.webp" alt="pfp">
+<div>Goobie</div>
+<img src="goobie.webp" alt="pfp">
 </div>
 
 <div class="project-box">
-<div>KirbyXD</div>
-<img src="kirb.webp" alt="pfp">
+<div>CristianoXD</div>
+<img src="https://discord.com/assets/18e336a74a159cfd.png?size=1024&format=webp&quality=lossless" alt="deleted his acc">
 </div>
 
 <div class="project-box">
-<div>Nobodybutme</div>
-<img src="nobody.webp" alt="pfp">
+<div>Marinica</div>
+<img src="marinica.webp" alt="pfp">
 </div>
 
 <div class="project-box">
-<div>Astrokiff</div>
-<img src="astro.webp" alt="pfp">
+<div>Asan/Osono</div>
+<img src="asan.webp" alt="pfp">
 </div>
-
-<div class="project-box">
-<div>Sandwich</div>
-<img src="sandwic.gif" alt="pfp">
-</div>
-
-<div class="project-box">
-<div>Sonoilprim</div>
-<img src="sonoilprim.webp" alt="pfp">
-</div>
-
-<div class="project-box">
-<div>Yiming</div>
-<img src="yiming.webp" alt="pfp">
-</div>
-
-<div class="project-box">
-<div>Sabisa</div>
-<img src="sabisa.webp" alt="pfp">
-</div>
-
-<div class="project-box">
-<div>Gminiy</div>
-<img src="gminiy.webp" alt="pfp">
-</div>
-
-<div class="project-box">
-<div>TK50P</div>
-<img src="tk.webp" alt="pfp">
-</div>
-
-<div class="project-box">
-<div>Fanscobec</div>
-<img src="franscobec.gif" alt="pfp">
-</div>
-
 
 </div>
 
