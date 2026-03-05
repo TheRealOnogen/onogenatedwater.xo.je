@@ -51,27 +51,13 @@ canvas {
 }
 
 .search-box {
-    margin-top:40px;
+    margin-top:20px;
     background: rgba(0,40,90,0.85);
     backdrop-filter: blur(14px);
     padding: 3px;
     border-radius: 14px;
     box-shadow: 0 0 6px rgba(0,160,255,.25),
                 inset 0 0 8px rgba(0,120,255,.15);
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.search-box select{
-    border:none;
-    outline:none;
-    background: rgba(0,20,60,0.85);
-    color:#7fd4ff;
-    padding:14px;
-    border-radius:10px;
-    font-family:'Quicksand',sans-serif;
-    font-size:14px;
 }
 
 .search-box input {
@@ -85,6 +71,20 @@ canvas {
     color: #7fd4ff;
     font-size: 16px;
     font-family: 'Quicksand', sans-serif;
+}
+
+.engine-select{
+    margin-top:20px;
+    border:none;
+    outline:none;
+    background: rgba(0,40,90,0.85);
+    color:#7fd4ff;
+    padding:12px 18px;
+    border-radius:12px;
+    backdrop-filter: blur(14px);
+    font-family:'Quicksand',sans-serif;
+    box-shadow: 0 0 6px rgba(0,160,255,.25),
+                inset 0 0 8px rgba(0,120,255,.15);
 }
 
 .bottom-box {
@@ -116,14 +116,15 @@ Onogenated Water Home
 <div id="subtitle"></div>
 </div>
 
-<form class="search-box" onsubmit="handleSearch(event)">
-<select id="engineSelect">
+<select id="engineSelect" class="engine-select">
 <option value="google">Google</option>
 <option value="duck">DuckDuckGo</option>
 <option value="bing">Bing</option>
 <option value="brave">Brave</option>
 <option value="yahoo">Yahoo</option>
 </select>
+
+<form class="search-box" onsubmit="handleSearch(event)">
 <input type="text" id="searchInput" placeholder="Search or type a URL" autofocus>
 </form>
 
@@ -182,13 +183,11 @@ const ua = navigator.userAgent;
 let browser = "Unknown";
 let version = "Unknown";
 
-/* Firefox */
 if(ua.includes("Firefox/")){
 browser = "Firefox";
 version = ua.match(/Firefox\/([\d.]+)/)?.[1] || "Unknown";
 }
 
-/* Chrome / Chromium / Edge / Opera */
 else if(ua.includes("Chrome/")){
 
 if(ua.includes("Edg/")){
@@ -207,7 +206,6 @@ version = ua.match(/Chrome\/([\d.]+)/)?.[1] || "Unknown";
 }
 }
 
-/* Safari */
 else if(ua.includes("Safari/") && ua.includes("Version/")){
 browser = "Safari";
 version = ua.match(/Version\/([\d.]+)/)?.[1] || "Unknown";
