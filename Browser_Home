@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Onogenated Water</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    background: black;
+    width: 100%;
+    height: 100%;
+    font-family: 'Quicksand', sans-serif;
+    overflow: hidden;
+}
+
+canvas {
+    position: fixed;
+    inset: 0;
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.center-container{
+    position: relative;
+    z-index: 1;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+#title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 600;
+    color: #7fd4ff;
+    text-shadow: 0 0 20px rgba(0,180,255,.6), 0 0 40px rgba(0,120,255,.4);
+}
+
+#subtitle {
+    margin-top: 6px;
+    font-size: 14px;
+    opacity: .7;
+}
+
+.search-box {
+    margin-top:40px;
+    background: rgba(0,40,90,0.85);
+    backdrop-filter: blur(14px);
+    padding: 3px 3px;
+    border-radius: 14px;
+    box-shadow: 0 0 6px rgba(0,160,255,.25),
+                inset 0 0 8px rgba(0,120,255,.15);
+}
+
+.search-box input {
+    width: 520px;
+    max-width: 90vw;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: rgba(0,20,60,0.85);
+    color: #7fd4ff;
+    font-size: 16px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.bottom-box {
+    margin-top:35px;
+    padding: 12px 35px;
+    background: rgba(0,40,90,0.85);
+    backdrop-filter: blur(14px);
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0,160,255,.25),
+                inset 0 0 10px rgba(0,120,255,.2);
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #7fd4ff;
+}
+
+.bottom-box:hover{
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="center-container">
+
+<div id="title">
+Onogenated Water Home
+<div id="subtitle"></div>
+</div>
+
+<form class="search-box" onsubmit="handleSearch(event)">
+<input type="text" id="searchInput" placeholder="Search" autofocus>
+</form>
+
+<a class="bottom-box" href="https://onogenatedwater.xo.je/">Onogenated Water</a>
+
+</div>
+
+<canvas id="c"></canvas>
+
+<script>
+
+/* SEARCH */
+
+function handleSearch(event){
+event.preventDefault();
+
+const input=document.getElementById("searchInput").value.trim();
+if(!input)return;
+
+let urlPattern=/^(https?:\/\/)?([\w.-]+\.[a-z]{2,})(\/.*)?$/i;
+
+if(urlPattern.test(input)){
+let finalURL=input;
+
+if(!finalURL.startsWith("http")){
+finalURL="https://"+finalURL;
+}
+
+window.location.href=finalURL;
+
+}else{
+
+window.location.href="https://www.google.com/search?q="+encodeURIComponent(input);
+
+}
+
+}
+
+
+/* BROWSER DETECTION */
+
+function detectBrowser(){
+
+const ua=navigator.userAgent;
+
+if(ua.includes("Firefox")) return "Firefox";
+if(ua.includes("Edg")) return "Edge";
+if(ua.includes("Chrome")) return "Chrome";
+if(ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
+if(ua.includes("OPR") || ua.includes("Opera")) return "Opera";
+
+return "an unknown browser";
+
+}
+
+document.getElementById("subtitle").textContent="On "+detectBrowser();
+
+
+/* ORB BACKGROUND */
+
+const canvas=document.getElementById("c");
+const ctx=canvas.getContext("2d");
+
+function resize(){
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+}
+
+window.addEventListener("resize",resize);
+resize();
+
+let mouseX=0,mouseY=0;
+
+window.addEventListener("mousemove",e=>{
+mouseX=(e.clientX/innerWidth-.5)*2;
+mouseY=(e.clientY/innerHeight-.5)*2;
+});
+
+const ORB_COUNT=14;
+const orbs=[];
+
+function rand(a,b){return Math.random()*(b-a)+a}
+
+function randomBlue(){
+const m=Math.random();
+
+if(m<.33)return`rgb(${rand(0,30)|0},${rand(80,160)|0},255)`
+if(m<.66)return`rgb(0,${rand(180,240)|0},255)`
+
+return`rgb(${rand(40,100)|0},${rand(140,200)|0},255)`
+}
+
+class Orb{
+
+constructor(){this.reset()}
+
+reset(){
+this.x=rand(-300,canvas.width+300)
+this.y=rand(-300,canvas.height+300)
+this.r=rand(250,520)
+this.dx=rand(-.5,.5)
+this.dy=rand(-.5,.5)
+this.depth=rand(.2,1)
+this.color=randomBlue()
+this.alpha=0
+}
+
+update(){
+
+this.x+=this.dx
+this.y+=this.dy
+
+this.alpha=Math.min(this.alpha+.003,1)
+
+if(this.x<-900||this.x>canvas.width+900||this.y<-900||this.y>canvas.height+900){
+this.reset()
+}
+
+}
+
+draw(){
+
+const px=this.x+mouseX*80*this.depth
+const py=this.y+mouseY*80*this.depth
+
+const g=ctx.createRadialGradient(px,py,0,px,py,this.r)
+
+g.addColorStop(0,this.color)
+g.addColorStop(1,"transparent")
+
+ctx.globalAlpha=this.alpha
+ctx.fillStyle=g
+
+ctx.beginPath()
+ctx.arc(px,py,this.r,0,Math.PI*2)
+ctx.fill()
+
+ctx.globalAlpha=1
+
+}
+
+}
+
+for(let i=0;i<ORB_COUNT;i++)orbs.push(new Orb())
+
+function loop(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+for(const o of orbs){
+o.update()
+o.draw()
+}
+
+requestAnimationFrame(loop)
+
+}
+
+loop();
+
+</script>
+
+</body>
+</html>
