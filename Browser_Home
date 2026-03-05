@@ -73,6 +73,27 @@ canvas {
     font-family: 'Quicksand', sans-serif;
 }
 
+/* dropdown corner position */
+.engine-select{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    border:none;
+    outline:none;
+    background: rgba(0,40,90,0.85);
+    color:#7fd4ff;
+    padding:10px 16px;
+    border-radius:12px;
+    backdrop-filter: blur(14px);
+    font-family:'Quicksand',sans-serif;
+
+    box-shadow: 0 0 6px rgba(0,160,255,.25),
+                inset 0 0 8px rgba(0,120,255,.15);
+
+    z-index:2;
+}
+
 .bottom-box {
     margin-top:35px;
     padding: 12px 35px;
@@ -94,6 +115,14 @@ canvas {
 </head>
 
 <body>
+
+<select id="engineSelect" class="engine-select">
+<option value="google">Google</option>
+<option value="duck">DuckDuckGo</option>
+<option value="bing">Bing</option>
+<option value="brave">Brave</option>
+<option value="yahoo">Yahoo</option>
+</select>
 
 <div class="center-container">
 
@@ -124,6 +153,8 @@ function handleSearch(event){
 event.preventDefault();
 
 const input = document.getElementById("searchInput").value.trim();
+const engine = document.getElementById("engineSelect").value;
+
 if(!input) return;
 
 let urlPattern = /^(https?:\/\/)?([\w.-]+\.[a-z]{2,})(\/.*)?$/i;
@@ -134,12 +165,18 @@ if(!url.startsWith("http")){
 url = "https://" + url;
 }
 window.location.href = url;
+return;
 }
-else{
-window.location.href =
-"https://www.google.com/search?q=" +
-encodeURIComponent(input);
-}
+
+const engines = {
+google: "https://www.google.com/search?q=",
+duck: "https://duckduckgo.com/?q=",
+bing: "https://www.bing.com/search?q=",
+brave: "https://search.brave.com/search?q=",
+yahoo: "https://search.yahoo.com/search?p="
+};
+
+window.location.href = engines[engine] + encodeURIComponent(input);
 }
 
 
