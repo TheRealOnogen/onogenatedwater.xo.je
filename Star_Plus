@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Star Plus Specs</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    background: black;
+    width: 100%;
+    height: 100%;
+    font-family: 'Quicksand', sans-serif;
+    overflow-y: auto;
+}
+
+canvas {
+    position: fixed;
+    inset: 0;
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+#title {
+    text-align: center;
+    font-size: 36px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: #7fd4ff;
+    text-shadow: 0 0 20px rgba(0,180,255,.6), 0 0 40px rgba(0,120,255,.4);
+    margin-top: 24px;
+    position: relative;
+}
+
+#subtitle {
+    margin-top: 6px;
+    font-size: 14px;
+    opacity: .7;
+}
+
+#specs {
+    text-align: center;
+    color: #9adfff;
+    margin: 80px auto 100px;
+    max-width: 600px;
+    padding: 0 10px;
+}
+
+.spec-box {
+    display: inline-block;
+    padding: 40px 30px;
+    width: 70%;
+    background: rgba(0,40,90,0.85);
+    backdrop-filter: blur(14px);
+    border-radius: 18px;
+    box-shadow: 0 0 30px rgba(0,160,255,.4), inset 0 0 30px rgba(0,120,255,.35);
+    margin-bottom: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: left;
+    color: #7fd4ff;
+
+    position: relative;
+    z-index: 2;
+}
+
+.spec-box p {
+    margin: 0px 0;
+    line-height: 1.5;
+}
+
+.spec-box img{
+    display:block;
+    margin:25px auto 0;
+    width:420px;
+    max-width:100%;
+    height:auto;
+    border-radius:12px;
+    box-shadow:0 0 25px rgba(0,160,255,.5);
+}
+
+@media (max-width: 600px) {
+    #title {font-size: 28px;}
+    .spec-box {padding: 30px 20px; font-size: 14px;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="title">
+Galaxy Star Plus
+<div id="subtitle">It's bad</div>
+</div>
+
+<div id="specs">
+<div class="spec-box">
+<p><strong>Specs</strong></p>
+<p>CPU: Cortex-A5</p>
+<p>GPU: Something</p>
+<p>Storage: 4GB eMMC</p>
+<p>Screen: 480x800 4"</p>
+<p>RAM: 512MB</p>
+<p>OS: Android 6 (LineageOS)</p>
+<p>Battery: 1500mAh</p>
+<p>Camera: 2MP</p>
+<p>Released in: October 2013</p>
+
+<img src="Star_Plus.jpg">
+</div>
+</div>
+
+<canvas id="c"></canvas>
+
+<script>
+const canvas=document.getElementById("c");
+const ctx=canvas.getContext("2d");
+
+function resize(){
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+}
+window.addEventListener("resize",resize);
+resize();
+
+let mouseX=0,mouseY=0;
+
+window.addEventListener("mousemove",e=>{
+mouseX=(e.clientX/innerWidth-.5)*2;
+mouseY=(e.clientY/innerHeight-.5)*2;
+});
+
+const ORB_COUNT=14;
+const orbs=[];
+
+function rand(a,b){
+return Math.random()*(b-a)+a;
+}
+
+function randomBlue(){
+const m=Math.random();
+if(m<.33)return`rgb(${rand(0,30)|0},${rand(80,160)|0},255)`;
+if(m<.66)return`rgb(0,${rand(180,240)|0},255)`;
+return`rgb(${rand(40,100)|0},${rand(140,200)|0},255)`;
+}
+
+class Orb{
+constructor(){
+this.reset();
+}
+
+reset(){
+this.x=rand(-300,canvas.width+300);
+this.y=rand(-300,canvas.height+300);
+this.r=rand(250,520);
+this.dx=rand(-.5,.5);
+this.dy=rand(-.5,.5);
+this.depth=rand(.2,1);
+this.color=randomBlue();
+this.alpha=0;
+}
+
+update(){
+this.x+=this.dx;
+this.y+=this.dy;
+this.alpha=Math.min(this.alpha+.003,1);
+
+if(
+this.x<-900||
+this.x>canvas.width+900||
+this.y<-900||
+this.y>canvas.height+900
+){
+this.reset();
+}
+}
+
+draw(){
+const px=this.x+mouseX*80*this.depth;
+const py=this.y+mouseY*80*this.depth;
+
+const g=ctx.createRadialGradient(px,py,0,px,py,this.r);
+g.addColorStop(0,this.color);
+g.addColorStop(1,"transparent");
+
+ctx.globalAlpha=this.alpha;
+ctx.fillStyle=g;
+
+ctx.beginPath();
+ctx.arc(px,py,this.r,0,Math.PI*2);
+ctx.fill();
+
+ctx.globalAlpha=1;
+}
+}
+
+for(let i=0;i<ORB_COUNT;i++){
+orbs.push(new Orb());
+}
+
+function loop(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+for(const o of orbs){
+o.update();
+o.draw();
+}
+
+requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+
+</body>
+</html>
