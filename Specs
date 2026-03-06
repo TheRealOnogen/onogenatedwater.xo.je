@@ -86,9 +86,23 @@ My devices
 <div id="devices">
 <h2>Device List</h2>
 
-<a class="device-box" href="Main_PC">Main PC</a>
+<a class="device-box" href="Mainbox">Mainbox</a>
 <a class="device-box" href="Old_PC">Old PC</a>
 <a class="device-box" href="Shitbook">Shitbook</a>
+<a class="device-box" href="Star_Plus">Galaxy Star Plus</a>
+<a class="device-box" href="Star_Advance">Galaxy Star Advance</a>
+<a class="device-box" href="Star_3">Galaxy Star 3</a>
+<a class="device-box" href="a6010">Lenovo A6010</a>
+<a class="device-box" href="a2010">Lenovo A2010</a>
+<a class="device-box" href="4s">iPhone 4S</a>
+<a class="device-box" href="tab2">Galaxy Tab 2 7.0</a>
+<a class="device-box" href="Tecno">Tecno Dumb Phone</a>
+<a class="device-box" href="mijue">Mijue whatever</a>
+<a class="device-box" href="doogee">Doogee whatever</a>
+<a class="device-box" href="ainol">Ainol Tab 8 Novo</a>
+<a class="device-box" href="a05">Galaxy A05</a>
+<a class="device-box" href="a265g">Galaxy A26 5G</a>
+<a class="device-box" href="xperiax">Sony Xperia X</a>
 
 </div>
 
