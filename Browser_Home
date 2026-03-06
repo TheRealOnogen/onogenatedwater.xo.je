@@ -117,7 +117,7 @@ canvas {
 <body>
 
 <select id="engineSelect" class="engine-select">
-<option value="googleaint">Google (No ai)</option>
+<option value="googleaint">Google (No AI)</option>
 <option value="google">Google</option>
 <option value="duck">DuckDuckGo</option>
 <option value="bing">Bing</option>
