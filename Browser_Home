@@ -117,6 +117,7 @@ canvas {
 <body>
 
 <select id="engineSelect" class="engine-select">
+<option value="googleaint">Google (No ai)</option>
 <option value="google">Google</option>
 <option value="duck">DuckDuckGo</option>
 <option value="bing">Bing</option>
@@ -169,7 +170,7 @@ return;
 }
 
 const engines = {
-google (no ai): "https://www.google.com/search?udm=14&q="
+googleaint: "https://www.google.com/search?udm=14&q="
 google: "https://www.google.com/search?q=",
 duck: "https://duckduckgo.com/?q=",
 bing: "https://www.bing.com/search?q=",
