@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Shitbook Specs</title>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
 <style>
 html, body {
     margin: 0;
@@ -51,7 +52,7 @@ canvas {
 .spec-box {
     display: inline-block;
     padding: 40px 30px;
-    width: 50%;
+    width: 70%;
     background: rgba(0,40,90,0.85);
     backdrop-filter: blur(14px);
     border-radius: 18px;
@@ -61,11 +62,24 @@ canvas {
     font-weight: 500;
     text-align: left;
     color: #7fd4ff;
+
+    position: relative;
+    z-index: 2;
 }
 
 .spec-box p {
     margin: 0px 0;
     line-height: 1.5;
+}
+
+.spec-box img{
+    display:block;
+    margin:25px auto 0;
+    width:420px;
+    max-width:100%;
+    height:auto;
+    border-radius:12px;
+    box-shadow:0 0 25px rgba(0,160,255,.5);
 }
 
 @media (max-width: 600px) {
@@ -79,7 +93,7 @@ canvas {
 
 <div id="title">
 Shitbook
-<div id="subtitle">Bad Netbook From 2010</div>
+<div id="subtitle">Netbook from 2010</div>
 </div>
 
 <div id="specs">
@@ -93,6 +107,9 @@ Shitbook
 <p>Storage: None</p>
 <p>OS: None</p>
 <p>PSU: 30W Charging brick</p>
+<p>Creation date: 2010</p>
+
+<img src="Shitbook.jpg">
 </div>
 </div>
 
@@ -102,10 +119,15 @@ Shitbook
 const canvas=document.getElementById("c");
 const ctx=canvas.getContext("2d");
 
-function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
-window.addEventListener("resize",resize);resize();
+function resize(){
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+}
+window.addEventListener("resize",resize);
+resize();
 
 let mouseX=0,mouseY=0;
+
 window.addEventListener("mousemove",e=>{
 mouseX=(e.clientX/innerWidth-.5)*2;
 mouseY=(e.clientY/innerHeight-.5)*2;
@@ -114,59 +136,80 @@ mouseY=(e.clientY/innerHeight-.5)*2;
 const ORB_COUNT=14;
 const orbs=[];
 
-function rand(a,b){return Math.random()*(b-a)+a}
+function rand(a,b){
+return Math.random()*(b-a)+a;
+}
 
 function randomBlue(){
 const m=Math.random();
-if(m<.33)return`rgb(${rand(0,30)|0},${rand(80,160)|0},255)`
-if(m<.66)return`rgb(0,${rand(180,240)|0},255)`
-return`rgb(${rand(40,100)|0},${rand(140,200)|0},255)`
+if(m<.33)return`rgb(${rand(0,30)|0},${rand(80,160)|0},255)`;
+if(m<.66)return`rgb(0,${rand(180,240)|0},255)`;
+return`rgb(${rand(40,100)|0},${rand(140,200)|0},255)`;
 }
 
 class Orb{
-constructor(){this.reset()}
+constructor(){
+this.reset();
+}
+
 reset(){
-this.x=rand(-300,canvas.width+300)
-this.y=rand(-300,canvas.height+300)
-this.r=rand(250,520)
-this.dx=rand(-.5,.5)
-this.dy=rand(-.5,.5)
-this.depth=rand(.2,1)
-this.color=randomBlue()
-this.alpha=0
+this.x=rand(-300,canvas.width+300);
+this.y=rand(-300,canvas.height+300);
+this.r=rand(250,520);
+this.dx=rand(-.5,.5);
+this.dy=rand(-.5,.5);
+this.depth=rand(.2,1);
+this.color=randomBlue();
+this.alpha=0;
 }
 
 update(){
-this.x+=this.dx
-this.y+=this.dy
-this.alpha=Math.min(this.alpha+.003,1)
+this.x+=this.dx;
+this.y+=this.dy;
+this.alpha=Math.min(this.alpha+.003,1);
 
-if(this.x<-900||this.x>canvas.width+900||this.y<-900||this.y>canvas.height+900){
-this.reset()
+if(
+this.x<-900||
+this.x>canvas.width+900||
+this.y<-900||
+this.y>canvas.height+900
+){
+this.reset();
 }
 }
 
 draw(){
-const px=this.x+mouseX*80*this.depth
-const py=this.y+mouseY*80*this.depth
-const g=ctx.createRadialGradient(px,py,0,px,py,this.r)
-g.addColorStop(0,this.color)
-g.addColorStop(1,"transparent")
-ctx.globalAlpha=this.alpha
-ctx.fillStyle=g
-ctx.beginPath()
-ctx.arc(px,py,this.r,0,Math.PI*2)
-ctx.fill()
-ctx.globalAlpha=1
+const px=this.x+mouseX*80*this.depth;
+const py=this.y+mouseY*80*this.depth;
+
+const g=ctx.createRadialGradient(px,py,0,px,py,this.r);
+g.addColorStop(0,this.color);
+g.addColorStop(1,"transparent");
+
+ctx.globalAlpha=this.alpha;
+ctx.fillStyle=g;
+
+ctx.beginPath();
+ctx.arc(px,py,this.r,0,Math.PI*2);
+ctx.fill();
+
+ctx.globalAlpha=1;
 }
 }
 
-for(let i=0;i<ORB_COUNT;i++)orbs.push(new Orb())
+for(let i=0;i<ORB_COUNT;i++){
+orbs.push(new Orb());
+}
 
 function loop(){
-ctx.clearRect(0,0,canvas.width,canvas.height)
-for(const o of orbs){o.update();o.draw()}
-requestAnimationFrame(loop)
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+for(const o of orbs){
+o.update();
+o.draw();
+}
+
+requestAnimationFrame(loop);
 }
 
 loop();
