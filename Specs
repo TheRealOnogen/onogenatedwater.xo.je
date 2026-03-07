@@ -14,6 +14,7 @@ html, body {
     font-family: 'Quicksand', sans-serif;
     overflow-y: auto;
 }
+
 canvas {
     position: fixed;
     inset: 0;
@@ -21,6 +22,7 @@ canvas {
     pointer-events: none;
     z-index: 0;
 }
+
 #title {
     text-align: center;
     font-size: 36px;
@@ -28,26 +30,35 @@ canvas {
     color: #7fd4ff;
     text-shadow: 0 0 20px rgba(0,180,255,.6), 0 0 40px rgba(0,120,255,.4);
     margin-top: 24px;
+
     position: relative;
+    z-index: 2;
 }
+
 #subtitle {
     margin-top: 6px;
     font-size: 14px;
     opacity: .7;
 }
+
 #devices {
     text-align: center;
     color: #9adfff;
     margin: 80px auto 100px;
     max-width: 1000px;
     padding: 0 10px;
+
+    position: relative;
+    z-index: 2;
 }
+
 #devices h2 {
     margin-bottom: 24px;
     font-weight: 500;
     font-size: 28px;
     text-shadow: 0 0 15px rgba(0,150,255,.6);
 }
+
 .device-box {
     display: inline-block;
     padding: 20px 35px;
@@ -64,9 +75,11 @@ canvas {
     color: #7fd4ff;
     text-align: center;
 }
+
 .device-box:hover {
     text-decoration: underline;
 }
+
 @media (max-width: 600px) {
     #title {font-size: 28px; margin-top: 16px;}
     #subtitle {font-size: 12px; margin-top: 4px;}
@@ -111,8 +124,13 @@ My devices
 <script>
 const canvas=document.getElementById("c");
 const ctx=canvas.getContext("2d");
-function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
-window.addEventListener("resize",resize);resize();
+
+function resize(){
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+}
+window.addEventListener("resize",resize);
+resize();
 
 let mouseX=0,mouseY=0;
 window.addEventListener("mousemove",e=>{
@@ -120,8 +138,11 @@ mouseX=(e.clientX/innerWidth-.5)*2;
 mouseY=(e.clientY/innerHeight-.5)*2;
 });
 
-const ORB_COUNT=14;const orbs=[];
+const ORB_COUNT=14;
+const orbs=[];
+
 function rand(a,b){return Math.random()*(b-a)+a}
+
 function randomBlue(){
 const m=Math.random();
 if(m<.33)return`rgb(${rand(0,30)|0},${rand(80,160)|0},255)`
@@ -131,6 +152,7 @@ return`rgb(${rand(40,100)|0},${rand(140,200)|0},255)`
 
 class Orb{
 constructor(){this.reset()}
+
 reset(){
 this.x=rand(-300,canvas.width+300)
 this.y=rand(-300,canvas.height+300)
@@ -141,31 +163,47 @@ this.depth=rand(.2,1)
 this.color=randomBlue()
 this.alpha=0
 }
+
 update(){
 this.x+=this.dx
 this.y+=this.dy
 this.alpha=Math.min(this.alpha+.003,1)
+
 if(this.x<-900||this.x>canvas.width+900||this.y<-900||this.y>canvas.height+900){
 this.reset()
 }
 }
+
 draw(){
 const px=this.x+mouseX*80*this.depth
 const py=this.y+mouseY*80*this.depth
+
 const g=ctx.createRadialGradient(px,py,0,px,py,this.r)
 g.addColorStop(0,this.color)
 g.addColorStop(1,"transparent")
+
 ctx.globalAlpha=this.alpha
 ctx.fillStyle=g
+
 ctx.beginPath()
 ctx.arc(px,py,this.r,0,Math.PI*2)
 ctx.fill()
+
 ctx.globalAlpha=1
 }
 }
 
 for(let i=0;i<ORB_COUNT;i++)orbs.push(new Orb())
-function loop(){ctx.clearRect(0,0,canvas.width,canvas.height);for(const o of orbs){o.update();o.draw()}requestAnimationFrame(loop)}
+
+function loop(){
+ctx.clearRect(0,0,canvas.width,canvas.height)
+for(const o of orbs){
+o.update()
+o.draw()
+}
+requestAnimationFrame(loop)
+}
+
 loop();
 </script>
 

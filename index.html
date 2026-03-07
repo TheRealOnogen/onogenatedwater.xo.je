@@ -31,6 +31,9 @@ canvas {
     color: #7fd4ff;
     text-shadow: 0 0 20px rgba(0,180,255,.6), 0 0 40px rgba(0,120,255,.4);
     margin-top: 24px;
+
+    position: relative;
+    z-index: 2;
 }
 
 #subtitle {
@@ -47,6 +50,9 @@ canvas {
     margin: 80px auto 100px;
     max-width: 1000px;
     padding: 0 10px;
+
+    position: relative;
+    z-index: 2;
 }
 
 #projects h2 {
@@ -137,7 +143,14 @@ Welcome to Onogenated Water
 </div>
 </div>
 
-<div class="project-box" style="text-align: center; margin-top: 0px;">
+<div class="project-box">
+<a href="Project_LTS_O">My discord server</a>
+<div class="project-desc">
+<iframe src="https://discord.com/widget?id=1479839172377313421&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+</div>
+</div>
+
+<div class="project-box" style="text-align: center; margin-top: 35px;">
 Wall of people
 <div class="project-desc">
 <p>Onogen Was Here</p>
@@ -156,11 +169,13 @@ Wall of people
 </div>
 
 <div style="width: 100%; text-align: center; margin-top: 10px;">
-    <a class="bottom-box" href="Specs">My Devices</a>
+<a class="bottom-box" href="Specs">My Devices</a>
 </div>
 
 <div style="width: 100%; text-align: center; margin-top: 60px;">
-    <a class="bottom-box" href="Misc">Misc Page</a>
+<a class="bottom-box" href="Misc">Misc Page</a>
+</div>
+
 </div>
 
 <canvas id="c"></canvas>
@@ -169,8 +184,12 @@ Wall of people
 const canvas=document.getElementById("c");
 const ctx=canvas.getContext("2d");
 
-function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
-window.addEventListener("resize",resize);resize();
+function resize(){
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+}
+window.addEventListener("resize",resize);
+resize();
 
 let mouseX=0,mouseY=0;
 window.addEventListener("mousemove",e=>{
@@ -219,11 +238,14 @@ const py=this.y+mouseY*80*this.depth
 const g=ctx.createRadialGradient(px,py,0,px,py,this.r)
 g.addColorStop(0,this.color)
 g.addColorStop(1,"transparent")
+
 ctx.globalAlpha=this.alpha
 ctx.fillStyle=g
+
 ctx.beginPath()
 ctx.arc(px,py,this.r,0,Math.PI*2)
 ctx.fill()
+
 ctx.globalAlpha=1
 }
 }
@@ -232,7 +254,12 @@ for(let i=0;i<ORB_COUNT;i++)orbs.push(new Orb())
 
 function loop(){
 ctx.clearRect(0,0,canvas.width,canvas.height)
-for(const o of orbs){o.update();o.draw()}
+
+for(const o of orbs){
+o.update()
+o.draw()
+}
+
 requestAnimationFrame(loop)
 }
 
