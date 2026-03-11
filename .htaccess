@@ -1,6 +1,11 @@
 DirectoryIndex index.php index.html index.htm index2.html
 #RedirectMatch 302 ^/(?!maintenance\.html).* /maintenance.html
 
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
 ErrorDocument 403 https://onogenatedwater.xo.je/403
 ErrorDocument 404 https://onogenatedwater.xo.je/404
 ErrorDocument 500 https://onogenatedwater.xo.je/500
