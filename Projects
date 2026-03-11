@@ -31,7 +31,6 @@ canvas {
     color: #7fd4ff;
     text-shadow: 0 0 20px rgba(0,180,255,.6), 0 0 40px rgba(0,120,255,.4);
     margin-top: 24px;
-
     position: relative;
     z-index: 2;
 }
@@ -50,7 +49,6 @@ canvas {
     margin: 80px auto 100px;
     max-width: 1000px;
     padding: 0 10px;
-
     position: relative;
     z-index: 2;
 }
@@ -74,6 +72,10 @@ canvas {
     font-size: 20px;
     font-weight: 600;
     text-align: center;
+
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
 }
 
 .project-box a {
@@ -127,48 +129,34 @@ canvas {
 <body>
 
 <div id="title">
-Welcome to Onogenated Water
-<div id="subtitle">By Onogen</div>
+My current projects
+<div id="subtitle"></div>
 </div>
 
 <div id="projects">
 <h2></h2>
 
-<div style="width: 100%; text-align: center; margin-bottom: 50px; margin-top: -60px;">
-<a class="bottom-box" href="Projects">Projects page</a>
+<div class="project-box">
+<a href="Project_LTS_O">Project LTS O</a>
+<div class="project-desc">
+<p>Project LTS O aims to make popular OSes easy to install, lightweight, and debloated.</p>
+<p>Current OSes:</p>
+<p>1. Windows 10 & 11<br>2. Alpine Linux<br>3. Arch Linux<br>4. Debian<br>5. Linux Mint<br>6. Gentoo</p>
+</div>
 </div>
 
 <div class="project-box">
-<a>My discord server</a>
+<a href="https://git.rtx3080ti0415.qzz.io/Onogen/Discord-RPC-rust">Discord RPC Rust</a>
 <div class="project-desc">
-<iframe src="https://discord.com/widget?id=1479839172377313421&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+<p>Just a discord rpc to show your specs and usage on discord written in rust</p>
 </div>
 </div>
 
-<div class="project-box" style="text-align: center; margin-top: 0px;">
-Wall of people
+<div class="project-box">
+<a href="https://git.rtx3080ti0415.qzz.io/Onogen/onogenatedwater.xo.je">onogenatedwater.xo.je</a>
 <div class="project-desc">
-<p>Onogen Was Here</p>
-<p>h.sandwich</p>
-<p>Andrew was not here (he was)</p>
-<p>Fella9 was funkin' here</p>
-<p>fsnopko - litrly jus put the msg above there</p>
-<p>in th worl ther is a overheating rtx3080ti  -RTX3080Ti</p>
-<p>h  -KirbyXD</p>
-<p>yes -Nobodybutme</p>
-<p>I cannot fulfill this request as it contains hate speech and promotes violence. My purpose is to be helpful and harmless, and generating such content goes against my safety guidelines. -Astrokiff</p>
-<p>hv is awesome and so is the big E -Yinimg</p>
-<p>2026/02/26 15:05:05 http: TLS handshake error from 204.76.203.8:43800: client sent an HTTP request to an HTTPS server -gminiy </p>
-<p>h -sonoilprim</p>
+<p>This website</p>
 </div>
-</div>
-
-<div style="width: 100%; text-align: center; margin-top: 10px;">
-<a class="bottom-box" href="Specs">My Devices</a>
-</div>
-
-<div style="width: 100%; text-align: center; margin-top: 60px;">
-<a class="bottom-box" href="Misc">Misc Page</a>
 </div>
 
 </div>
@@ -206,6 +194,7 @@ return`rgb(${rand(40,100)|0},${rand(140,200)|0},255)`
 
 class Orb{
 constructor(){this.reset()}
+
 reset(){
 this.x=rand(-300,canvas.width+300)
 this.y=rand(-300,canvas.height+300)
@@ -230,6 +219,7 @@ this.reset()
 draw(){
 const px=this.x+mouseX*80*this.depth
 const py=this.y+mouseY*80*this.depth
+
 const g=ctx.createRadialGradient(px,py,0,px,py,this.r)
 g.addColorStop(0,this.color)
 g.addColorStop(1,"transparent")
