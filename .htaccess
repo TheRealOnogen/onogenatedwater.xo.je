@@ -1,5 +1,6 @@
 DirectoryIndex index.php index.html index.htm index2.html
 #RedirectMatch 302 ^/(?!maintenance\.html).* /maintenance.html
+#DirectoryIndex aprilfools.html
 
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-d
