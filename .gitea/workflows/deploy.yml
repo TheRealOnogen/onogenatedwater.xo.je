@@ -1,27 +1,28 @@
 name: Deploy to InfinityFree
-
 on:
   push:
     branches:
       - main
-
 jobs:
   deploy:
     runs-on: archlinux
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        run: |
+          git clone --depth 1 -b main https://git.rtx3080ti0415.qzz.io/Onogen/onogenatedwater.xo.je.git .
 
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
-          local-dir: ./
-          server-dir: /htdocs/
-          exclude: |
-            **/.git*
-            **/.git*/**
-            .gitea/**
-            README.md
+      - name: Deploy via LFTP
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+        run: |
+          lftp -e "set ftp:ssl-allow no; \
+          open $FTP_HOST; \
+          user $FTP_USER $FTP_PASS; \
+          mirror --reverse --delete --verbose \
+          --exclude .git/ \
+          --exclude .gitea/ \
+          --exclude README.md \
+          ./ /htdocs/; \
+          bye"
