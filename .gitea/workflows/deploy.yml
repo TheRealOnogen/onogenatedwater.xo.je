@@ -6,7 +6,11 @@ on:
 jobs:
   deploy:
     runs-on: archlinux
+    container:
+      image: alpine:latest
     steps:
+      - name: Install Tools
+        run: apk add --no-cache git lftp
       - name: Checkout
         run: |
           git clone --depth 1 -b main https://git.rtx3080ti0415.qzz.io/Onogen/onogenatedwater.xo.je.git .
