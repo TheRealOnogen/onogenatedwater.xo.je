@@ -24,7 +24,7 @@ jobs:
           lftp -e "set ftp:ssl-allow no; \
           open $FTP_HOST; \
           user $FTP_USER $FTP_PASS; \
-          mirror --reverse --delete --verbose \
+          mirror --reverse --delete --verbose --no-perms \
           --exclude .git/ \
           --exclude .gitea/ \
           --exclude README.md \
