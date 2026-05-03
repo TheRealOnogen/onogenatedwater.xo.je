@@ -27,4 +27,6 @@ Cus i'm fucking running out of google drive storage, ion have 10 terrabytes of s
 11. mpv
 12. bash
 13. GRUB <br>
-And many more i prolly forgot
+And many more i prolly forgot <br>
+
+Ion fucking know how to open source a linux distro
