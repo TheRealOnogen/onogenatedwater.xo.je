@@ -26,5 +26,5 @@ Cus i'm fucking running out of google drive storage, ion have 10 terrabytes of s
 10. blk utils
 11. mpv
 12. bash
-13. GRUB
+13. GRUB <br>
 And many more i prolly forgot
