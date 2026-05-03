@@ -1,0 +1,5 @@
+#%PAM-1.0
+auth sufficent pam_permit.so
+account sufficent pam_permit.so
+session sufficent pam_permit.so
+password sufficent pam_permit.so

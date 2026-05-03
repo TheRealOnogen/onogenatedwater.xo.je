@@ -1,0 +1,13 @@
+prefix=/usr
+includedir=${prefix}/include
+libdir=${prefix}/lib
+
+pluginsdir=/usr/lib/rc/plugins
+initdir=/usr/libexec/rc/init.d
+confdir=/usr/libexec/rc/conf.d
+
+Name: OpenRC
+Description: Universal init system
+Version: 0.63
+Libs: -L${prefix}/lib -lrc
+Cflags: -I${includedir}

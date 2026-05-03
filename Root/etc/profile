@@ -1,0 +1,4 @@
+if [ -f /etc/bash.bashrc ]; then
+    . /etc/bash.bashrc
+fi
+export PATH=/bin:/sbin/:/usr/bin:/usr/sbin:/usr/local/bin

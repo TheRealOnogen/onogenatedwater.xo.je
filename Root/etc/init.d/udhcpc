@@ -1,0 +1,22 @@
+#!/sbin/openrc-run
+
+description="Network setup"
+pidfile=/run/udhcpc.pid
+
+depend() {
+	before sshd
+}
+
+start() {
+	ebegin "Setting up network"
+	ip link set eth0 up
+	udhcpc
+	eend $?
+}
+
+stop() {
+	eebegin "Killing network"
+	kill $(cat /run/udhcpc.pid 2>/dev/null) 2>/dev/null
+	ip link set eth0 down
+	eend $?
+}

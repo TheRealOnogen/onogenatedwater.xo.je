@@ -1,0 +1,2 @@
+UUID=FD36-6FAE /boot vfat defaults,noatime 0 2
+UUID=faa1189e-e1d6-4525-b030-6cb1d581911e none swap defaults 0 0

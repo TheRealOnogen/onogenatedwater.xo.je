@@ -1,0 +1,3 @@
+glibc
+libncursesw.so
+ncurses

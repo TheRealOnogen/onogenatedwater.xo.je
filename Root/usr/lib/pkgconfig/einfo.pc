@@ -1,0 +1,9 @@
+prefix=/usr
+includedir=${prefix}/include
+libdir=${prefix}/lib
+
+Name: einfo
+Description: Pretty console informational display
+Version: 0.63
+Libs: -L${prefix}/lib -leinfo
+Cflags: -I${includedir}

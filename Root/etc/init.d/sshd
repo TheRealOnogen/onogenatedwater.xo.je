@@ -1,0 +1,23 @@
+#!/sbin/openrc-run
+
+description="OpenSSH Daemon"
+command=/usr/bin/sshd
+pidfile=/run/sshd.pid
+command_args="-o PidFile=/run/sshd.pid"
+
+depend() {
+	need net
+	after firewall
+}
+
+start() {
+	ebegin "Starting sshd"
+	/usr/bin/sshd
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping sshd"
+	kill $(cat /run/sshd.pit 2>/dev/null) 2>/dev/null
+	eend $?
+}
