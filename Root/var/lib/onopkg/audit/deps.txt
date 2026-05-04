@@ -1,7 +1,0 @@
-bash
-glibc
-krb5
-libkrb5.so
-libgssapi_krb5.so
-libcap-ng
-libcap-ng.so

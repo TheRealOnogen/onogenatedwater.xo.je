@@ -1,2 +1,0 @@
-[2026-04-14T09:15:11+0300] [PACMAN] Running 'pacman -b /mnt/onos//var/lib/pacman/ -r /mnt/onos -Sy --config=/tmp/pacman.conf.PB9l --disable-sandbox --noconfirm --cachedir=/mnt/onos//var/cache/pacman/pkg/ cowsay'
-[2026-04-14T09:15:11+0300] [PACMAN] synchronizing package lists

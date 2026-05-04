@@ -1,2 +1,0 @@
-#!/bin/bash
-openrc-shutdown -r 0
