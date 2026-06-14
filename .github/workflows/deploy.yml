@@ -13,7 +13,7 @@ jobs:
         run: apk add --no-cache git lftp
       - name: Checkout
         run: |
-          git clone --depth 1 -b main https://git.rtx3080ti0415.qzz.io/Onogen/onogenatedwater.xo.je.git .
+          git clone --depth 1 -b main https://github.com/Onogen/onogenatedwater.xo.je.git .
 
       - name: Deploy via LFTP
         env:
