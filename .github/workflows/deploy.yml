@@ -5,7 +5,7 @@ on:
       - main
 jobs:
   deploy:
-    runs-on: archlinux
+    runs-on: ubuntu-latest
     container:
       image: alpine:latest
     steps:
