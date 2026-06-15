@@ -53,7 +53,7 @@ canvas {
 
 .project-box {
     flex: 1 1 300px;              /* responsive width */
-    max-width: 400px;
+    max-width: 300px;
     padding: 40px 25px;
     background: rgba(0,40,90,0.85);
     backdrop-filter: blur(14px);
@@ -64,9 +64,31 @@ canvas {
     text-align: center;
 }
 
+.project-box-wide {
+    flex: 1 1 600px;              /* responsive width */
+    max-width: 600px;
+    padding: 40px 25px;
+    background: rgba(0,40,90,0.85);
+    backdrop-filter: blur(14px);
+    border-radius: 18px;
+    box-shadow: 0 0 30px rgba(0,160,255,.4), inset 0 0 30px rgba(0,120,255,.35);
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+
 .project-box img {
     width: 100%;
     height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: 15px 0;
+}
+
+.project-box-wide img {
+    width: 100%;
+    height: 230px;
     object-fit: cover;
     border-radius: 12px;
     margin: 15px 0;
@@ -97,11 +119,6 @@ Uncool People
 </div>
 
 <div class="project-box">
-<div>idontknow062524</div>
-<img src="idontknow.webp" alt="pfp">
-</div>
-
-<div class="project-box">
 <div>Goobie</div>
 <img src="goobie.webp" alt="pfp">
 </div>
@@ -122,11 +139,6 @@ Uncool People
 </div>
 
 <div class="project-box">
-<div>Trevor</div>
-<img src="trevor.webp" alt="pfp">
-</div>
-
-<div class="project-box">
 <div>Sabisa</div>
 <img src="sabisa.webp" alt="pfp">
 </div>
@@ -142,8 +154,13 @@ Uncool People
 </div>
 
 <div class="project-box">
-<div>Andrew</div>
-<img src="andrew.webp" alt="pfp">
+<div>Nobodybutme</div>
+<img src="nobody.webp" alt="pfp">
+</div>
+
+<div class="project-box-wide">
+<div>PC Sim Ada</div>
+<img src="incident.png" alt="pfp">
 </div>
 
 </div>
