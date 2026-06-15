@@ -21,7 +21,13 @@ canvas {
     inset: 0;
     filter: blur(90px);
     pointer-events: none;
-    z-index: 0;
+    z-index: -1;
+}
+
+/* Keep content above canvas */
+#title, #projects {
+    position: relative;
+    z-index: 1;
 }
 
 #title {

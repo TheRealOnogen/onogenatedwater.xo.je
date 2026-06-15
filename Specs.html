@@ -21,6 +21,13 @@ canvas {
     pointer-events: none;
     z-index: 0;
 }
+
+/* Keep content above canvas */
+#title, #devices {
+    position: relative;
+    z-index: 1;
+}
+
 #title {
     text-align: center;
     font-size: 36px;
