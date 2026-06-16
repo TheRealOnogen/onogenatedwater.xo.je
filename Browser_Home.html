@@ -4,114 +4,7 @@
 <meta charset="UTF-8">
 <title>New Tab</title>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-
-<style>
-html, body {
-    margin: 0;
-    padding: 0;
-    background: black;
-    width: 100%;
-    height: 100%;
-    font-family: 'Quicksand', sans-serif;
-    overflow: hidden;
-}
-
-canvas {
-    position: fixed;
-    inset: 0;
-    filter: blur(90px);
-    pointer-events: none;
-    z-index: 0;
-}
-
-.center-container{
-    position: relative;
-    z-index: 1;
-    height:100%;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-}
-
-#title {
-    text-align: center;
-    font-size: 36px;
-    font-weight: 600;
-    color: #7fd4ff;
-    text-shadow: 0 0 20px rgba(0,180,255,.6), 0 0 40px rgba(0,120,255,.4);
-}
-
-#subtitle {
-    margin-top: 6px;
-    font-size: 14px;
-    opacity: .7;
-    max-width: 80vw;
-    word-break: break-word;
-}
-
-.search-box {
-    margin-top:40px;
-    background: rgba(0,40,90,0.85);
-    backdrop-filter: blur(14px);
-    padding: 3px;
-    border-radius: 14px;
-    box-shadow: 0 0 6px rgba(0,160,255,.25),
-                inset 0 0 8px rgba(0,120,255,.15);
-}
-
-.search-box input {
-    width: 520px;
-    max-width: 90vw;
-    padding: 14px;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-    background: rgba(0,20,60,0.85);
-    color: #7fd4ff;
-    font-size: 16px;
-    font-family: 'Quicksand', sans-serif;
-}
-
-/* dropdown corner position */
-.engine-select{
-    position: fixed;
-    top: 20px;
-    right: 20px;
-
-    border:none;
-    outline:none;
-    background: rgba(0,40,90,0.85);
-    color:#7fd4ff;
-    padding:10px 16px;
-    border-radius:12px;
-    backdrop-filter: blur(14px);
-    font-family:'Quicksand',sans-serif;
-
-    box-shadow: 0 0 6px rgba(0,160,255,.25),
-                inset 0 0 8px rgba(0,120,255,.15);
-
-    z-index:2;
-}
-
-.bottom-box {
-    margin-top:35px;
-    padding: 12px 35px;
-    background: rgba(0,40,90,0.85);
-    backdrop-filter: blur(14px);
-    border-radius: 12px;
-    box-shadow: 0 0 8px rgba(0,160,255,.25),
-                inset 0 0 10px rgba(0,120,255,.2);
-    font-size: 18px;
-    font-weight: 600;
-    text-decoration: none;
-    color: #7fd4ff;
-}
-
-.bottom-box:hover{
-    text-decoration: underline;
-}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -136,7 +29,7 @@ Onogenated Water Home
 <input type="text" id="searchInput" placeholder="Search or type a URL" autofocus>
 </form>
 
-<a class="bottom-box" href="https://onogenatedwater.xo.je/">
+<a class="bottom-box2" href="https://onogenatedwater.xo.je/">
 Onogenated Water
 </a>
 
@@ -145,10 +38,6 @@ Onogenated Water
 <canvas id="c"></canvas>
 
 <script>
-
-/* =======================
-   SEARCH ENGINE
-======================= */
 
 function handleSearch(event){
 event.preventDefault();

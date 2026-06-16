@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Onogenated Water</title>
+<title>Wall Of Shame</title>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -10,34 +10,19 @@
 <body>
 
 <div id="title">
-My current projects
-<div id="subtitle"></div>
+Wall Of Shame
 </div>
 
-<div id="projects">
-<h2></h2>
+<div id="people">
 
-<div class="project-box">
-<a href="Project_LTS_O">Project LTS O</a>
-<div class="project-desc">
-<p>Project LTS O aims to make popular OSes easy to install, lightweight, and debloated.</p>
-<p>Current OSes:</p>
-<p>1. Windows 10 & 11<br>2. Alpine Linux<br>3. Arch Linux<br>4. Debian<br>5. Linux Mint<br>6. Gentoo<br>7. Fedora<br>8. NixOS</p>
-</div>
+<div class="hall-of-shame-box">
+<div>PC Sim Ada</div>
+<img src="incident.png" alt="pfp">
 </div>
 
-<div class="project-box">
-<a href="https://github.com/TheRealOnogen/Discord-RPC-rust">Discord RPC Rust</a>
-<div class="project-desc">
-<p>Just a discord rpc to show your specs and usage on discord written in rust</p>
-</div>
-</div>
-
-<div class="project-box">
-<a href="https://github.com/TheRealOnogen/onogenatedwater.xo.je">onogenatedwater.xo.je</a>
-<div class="project-desc">
-<p>This website</p>
-</div>
+<div class="hall-of-shame-box">
+<div>Foxy</div>
+<img src="framethis.png" alt="pfp">
 </div>
 
 </div>
@@ -48,12 +33,8 @@ My current projects
 const canvas=document.getElementById("c");
 const ctx=canvas.getContext("2d");
 
-function resize(){
-canvas.width=innerWidth;
-canvas.height=innerHeight;
-}
-window.addEventListener("resize",resize);
-resize();
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
+window.addEventListener("resize",resize);resize();
 
 let mouseX=0,mouseY=0;
 window.addEventListener("mousemove",e=>{
@@ -75,7 +56,6 @@ return`rgb(${rand(40,100)|0},${rand(140,200)|0},255)`
 
 class Orb{
 constructor(){this.reset()}
-
 reset(){
 this.x=rand(-300,canvas.width+300)
 this.y=rand(-300,canvas.height+300)
@@ -100,18 +80,14 @@ this.reset()
 draw(){
 const px=this.x+mouseX*80*this.depth
 const py=this.y+mouseY*80*this.depth
-
 const g=ctx.createRadialGradient(px,py,0,px,py,this.r)
 g.addColorStop(0,this.color)
 g.addColorStop(1,"transparent")
-
 ctx.globalAlpha=this.alpha
 ctx.fillStyle=g
-
 ctx.beginPath()
 ctx.arc(px,py,this.r,0,Math.PI*2)
 ctx.fill()
-
 ctx.globalAlpha=1
 }
 }
@@ -120,12 +96,7 @@ for(let i=0;i<ORB_COUNT;i++)orbs.push(new Orb())
 
 function loop(){
 ctx.clearRect(0,0,canvas.width,canvas.height)
-
-for(const o of orbs){
-o.update()
-o.draw()
-}
-
+for(const o of orbs){o.update();o.draw()}
 requestAnimationFrame(loop)
 }
 

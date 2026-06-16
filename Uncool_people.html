@@ -4,105 +4,7 @@
 <meta charset="UTF-8">
 <title>Uncool People</title>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-
-<style>
-html, body {
-    margin: 0;
-    padding: 0;
-    background: black;
-    width: 100%;
-    height: 100%;
-    font-family: 'Quicksand', sans-serif;
-    overflow-y: auto;
-}
-
-canvas {
-    position: fixed;
-    inset: 0;
-    filter: blur(90px);
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* Keep content above canvas */
-#title, #projects {
-    position: relative;
-    z-index: 1;
-}
-
-#title {
-    text-align: center;
-    font-size: 36px;
-    font-weight: 600;
-    color: #7fd4ff;
-    text-shadow: 0 0 20px rgba(0,180,255,.6), 0 0 40px rgba(0,120,255,.4);
-    margin-top: 24px;
-}
-
-/* FLEX LAYOUT FIX */
-#projects {
-    display: flex;
-    flex-wrap: wrap;              /* allows wrapping */
-    justify-content: center;      /* center horizontally */
-    gap: 40px;                    /* space between boxes */
-    color: #9adfff;
-    margin: 80px auto 100px;
-    max-width: 1200px;
-    padding: 0 10px;
-}
-
-.project-box {
-    flex: 1 1 300px;              /* responsive width */
-    max-width: 300px;
-    padding: 40px 25px;
-    background: rgba(0,40,90,0.85);
-    backdrop-filter: blur(14px);
-    border-radius: 18px;
-    box-shadow: 0 0 30px rgba(0,160,255,.4), inset 0 0 30px rgba(0,120,255,.35);
-    font-size: 20px;
-    font-weight: 600;
-    text-align: center;
-}
-
-.project-box-wide {
-    flex: 1 1 600px;              /* responsive width */
-    max-width: 600px;
-    padding: 40px 25px;
-    background: rgba(0,40,90,0.85);
-    backdrop-filter: blur(14px);
-    border-radius: 18px;
-    box-shadow: 0 0 30px rgba(0,160,255,.4), inset 0 0 30px rgba(0,120,255,.35);
-    font-size: 20px;
-    font-weight: 600;
-    text-align: center;
-}
-
-
-.project-box img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin: 15px 0;
-}
-
-.project-box-wide img {
-    width: 100%;
-    height: 230px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin: 15px 0;
-}
-
-.project-desc {
-    font-weight: 400;
-    margin-top: 10px;
-}
-
-@media (max-width: 600px) {
-    #title { font-size: 28px; }
-}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -111,54 +13,54 @@ canvas {
 Uncool People
 </div>
 
-<div id="projects">
+<div id="people">
 
-<div class="project-box">
+<div class="people-box">
 <div>Akquenti</div>
 <img src="akquenti.gif" alt="pfp">
 </div>
 
-<div class="project-box">
+<div class="people-box">
 <div>Goobie</div>
 <img src="goobie.webp" alt="pfp">
 </div>
 
-<div class="project-box">
+<div class="people-box">
 <div>CristianoXD</div>
 <img src="stinky.png" alt="pfp">
 </div>
 
-<div class="project-box">
+<div class="people-box">
 <div>Marinica</div>
 <img src="marinica.webp" alt="pfp">
 </div>
 
-<div class="project-box">
+<div class="people-box">
 <div>Asan/Osono</div>
 <img src="asan.webp" alt="pfp">
 </div>
 
-<div class="project-box">
+<div class="people-box">
 <div>Sabisa</div>
 <img src="sabisa.webp" alt="pfp">
 </div>
 
-<div class="project-box">
+<div class="people-box">
 <div>Sandwich</div>
 <img src="sandwic.gif" alt="pfp">
 </div>
 
-<div class="project-box">
+<div class="people-box">
 <div>Sonoilprim</div>
 <img src="sonoilprim.webp" alt="pfp">
 </div>
 
-<div class="project-box">
+<div class="people-box">
 <div>Nobodybutme</div>
 <img src="nobody.webp" alt="pfp">
 </div>
 
-<div class="project-box-wide">
+<div class="hall-of-shame-box">
 <div>PC Sim Ada</div>
 <img src="incident.png" alt="pfp">
 </div>
